@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Analytics Platform</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#020617;
+            color:white;
+            overflow-x:hidden;
+        }
+
+        .hero{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:40px;
+            background:
+            radial-gradient(circle at top left,#0ea5e9 0%,transparent 25%),
+            radial-gradient(circle at bottom right,#7c3aed 0%,transparent 25%),
+            #020617;
+        }
+
+        .hero-content{
+            max-width:1000px;
+        }
+
+        .hero h1{
+            font-size:70px;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+
+        .hero h1 span{
+            color:#38bdf8;
+        }
+
+        .hero p{
+            font-size:22px;
+            color:#94a3b8;
+            line-height:1.8;
+            margin-bottom:40px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:18px 40px;
+            background:#38bdf8;
+            color:white;
+            text-decoration:none;
+            border-radius:14px;
+            font-size:18px;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .btn:hover{
+            transform:translateY(-5px);
+            box-shadow:0 0 25px rgba(56,189,248,.5);
+        }
+
+        .section-title{
+            text-align:center;
+            font-size:42px;
+            margin-bottom:60px;
+        }
+
+        .features{
+            padding:100px 10%;
+        }
+
+        .feature-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+
+        .feature-card{
+            background:#0f172a;
+            border:1px solid #1e293b;
+            border-radius:20px;
+            padding:35px;
+            transition:.3s;
+        }
+
+        .feature-card:hover{
+            transform:translateY(-10px);
+        }
+
+        .feature-card i{
+            font-size:45px;
+            color:#38bdf8;
+            margin-bottom:20px;
+        }
+
+        .feature-card h3{
+            margin-bottom:15px;
+        }
+
+        .feature-card p{
+            color:#94a3b8;
+            line-height:1.7;
+        }
+
+        .tech{
+            padding:100px 10%;
+            background:#081224;
+        }
+
+        .tech-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            gap:25px;
+        }
+
+        .tech-card{
+            background:#0f172a;
+            padding:25px;
+            text-align:center;
+            border-radius:15px;
+            font-weight:600;
+        }
+
+        .stats{
+            padding:100px 10%;
+        }
+
+        .stats-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .stat-card{
+            background:#0f172a;
+            border-radius:20px;
+            padding:35px;
+            text-align:center;
+        }
+
+        .stat-card h2{
+            color:#38bdf8;
+            font-size:45px;
+        }
+
+        .footer{
+            padding:40px;
+            text-align:center;
+            color:#94a3b8;
+            border-top:1px solid #1e293b;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Sales Analytics <span>Platform</span></h1>
+
+        <p>
+            Advanced Sales Analytics, Machine Learning Prediction,
+            Revenue Forecasting and Business Intelligence Dashboard
+            built using Python, Flask and Data Analytics.
+        </p>
+
+        <a href="/login" class="btn">
+            <i class="fa-solid fa-chart-line"></i>
+            Launch Dashboard
+        </a>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <h2 class="section-title">
+        Project Features
+    </h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <i class="fa-solid fa-chart-column"></i>
+            <h3>Sales Dashboard</h3>
+            <p>
+                Interactive dashboard with KPI cards,
+                charts and revenue analysis.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-money-bill-trend-up"></i>
+            <h3>Revenue Analytics</h3>
+            <p>
+                Analyze revenue trends and
+                identify top performing periods.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-box"></i>
+            <h3>Product Analytics</h3>
+            <p>
+                Discover best-selling products and
+                product performance insights.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Regional Analysis</h3>
+            <p>
+                Compare business performance
+                across multiple regions.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-robot"></i>
+            <h3>Machine Learning</h3>
+            <p>
+                Linear Regression model for
+                revenue prediction and evaluation.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Sales Forecasting</h3>
+            <p>
+                Forecast future revenue using
+                historical sales data.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <h2 class="section-title">
+        Project Statistics
+    </h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h2>500+</h2>
+            <p>Sales Records</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>6</h2>
+            <p>Analytics Modules</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>ML</h2>
+            <p>Prediction System</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>PDF</h2>
+            <p>Report Export</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="tech">
+
+    <h2 class="section-title">
+        Technology Stack
+    </h2>
+
+    <div class="tech-grid">
+
+        <div class="tech-card">Python</div>
+        <div class="tech-card">Flask</div>
+        <div class="tech-card">Pandas</div>
+        <div class="tech-card">NumPy</div>
+        <div class="tech-card">Scikit-Learn</div>
+        <div class="tech-card">Chart.js</div>
+        <div class="tech-card">HTML5</div>
+        <div class="tech-card">CSS3</div>
+        <div class="tech-card">JavaScript</div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    Sales Analytics Platform © 2026
+
+    <br><br>
+
+    Internship Project by Jeyaram
+
+</footer>
+
+</body>
+</html>

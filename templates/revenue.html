@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Analytics</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <h2>Sales Analytics</h2>
+        </div>
+
+        <ul class="menu">
+
+        <li>
+                <a href="/dashboard" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/revenue" class="menu-link">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <span>Revenue Analytics</span>
+                </a>
+            </li>
+
+            <li>
+    <a href="/product" class="menu-link">
+        <i class="fa-solid fa-box"></i>
+        <span>Product Analytics</span>
+    </a>
+</li>
+
+<li>
+    <a href="/region" class="menu-link">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Regional Analytics</span>
+    </a>
+</li>
+
+            
+
+            <li>
+                <a href="/prediction" class="menu-link">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Prediction</span>
+                </a>
+            </li>
+<li>
+    <a href="/reports" class="menu-link">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Reports</span>
+    </a>
+</li>
+
+<li>
+    <a href="/forecast" class="menu-link">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Sales Forecast</span>
+    </a>
+</li>
+
+<li>
+    <a href="/upload" class="menu-link">
+        <i class="fa-solid fa-upload"></i>
+        <span>Upload Dataset</span>
+    </a>
+</li>
+<li>
+    <a href="/logout" class="menu-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </a>
+</li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>Revenue Analytics Dashboard</h1>
+
+            <div class="profile">
+                <i class="fa-solid fa-user"></i>
+                <span>Admin</span>
+            </div>
+
+        </div>
+
+        <!-- Revenue Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon revenue">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+                <h3>Total Revenue</h3>
+                <h2>₹{{ total_revenue }}</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-icon orders">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <h3>Average Revenue</h3>
+                <h2>₹{{ average_revenue }}</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-icon product">
+                    <i class="fa-solid fa-calendar"></i>
+                </div>
+
+                <h3>Best Month</h3>
+                <h2>{{ best_month }}</h2>
+            </div>
+
+        </div>
+
+        <!-- Monthly Revenue Chart -->
+
+        <div class="chart-card">
+
+            <h2>Monthly Revenue Trend</h2>
+
+            <canvas id="monthlyRevenueChart"></canvas>
+
+        </div>
+
+        <!-- Revenue Insights -->
+
+        <div class="insight-card">
+
+            <h2>Revenue Insights</h2>
+
+            <ul>
+
+                <li>
+                    Total Revenue Generated:
+                    <strong>₹{{ total_revenue }}</strong>
+                </li>
+
+                <li>
+                    Average Revenue:
+                    <strong>₹{{ average_revenue }}</strong>
+                </li>
+
+                <li>
+                    Highest Revenue Month:
+                    <strong>{{ best_month }}</strong>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+
+const monthLabels = {{ month_labels | tojson }};
+const monthValues = {{ month_values | tojson }};
+
+new Chart(
+    document.getElementById("monthlyRevenueChart"),
+    {
+        type: "line",
+
+        data: {
+            labels: monthLabels,
+
+            datasets: [{
+                label: "Revenue",
+
+                data: monthValues,
+
+                borderColor: "#38bdf8",
+
+                backgroundColor:
+                "rgba(56,189,248,0.15)",
+
+                fill: true,
+
+                tension: 0.4
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "white"
+                    }
+                }
+            },
+
+            scales: {
+
+                x: {
+                    ticks: {
+                        color: "white"
+                    }
+                },
+
+                y: {
+                    ticks: {
+                        color: "white"
+                    }
+                }
+
+            }
+
+        }
+    }
+);
+
+</script>
+
+</body>
+</html>

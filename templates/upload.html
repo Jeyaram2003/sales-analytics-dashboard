@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Dataset</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <h2>Sales Analytics</h2>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+    <a href="/revenue" class="menu-link">
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+        <span>Revenue Analytics</span>
+    </a>
+</li>
+
+            <li>
+    <a href="/product" class="menu-link">
+        <i class="fa-solid fa-box"></i>
+        <span>Product Analytics</span>
+    </a>
+</li>
+
+            <li>
+    <a href="/region" class="menu-link">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Regional Analytics</span>
+    </a>
+</li>
+
+            <li>
+    <a href="/prediction" class="menu-link">
+        <i class="fa-solid fa-robot"></i>
+        <span>Prediction</span>
+    </a>
+</li>
+
+            <li>
+    <a href="/reports" class="menu-link">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Reports</span>
+    </a>
+</li>
+
+<li>
+    <a href="/forecast" class="menu-link">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Sales Forecast</span>
+    </a>
+</li>
+
+
+            <li class="active">
+                <a href="/upload" class="menu-link">
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Upload Dataset</span>
+                </a>
+            </li>
+            <li>
+    <a href="/logout" class="menu-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </a>
+</li>
+
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h1>Upload New Dataset</h1>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div style="
+                background:#28a745;
+                color:white;
+                padding:15px;
+                border-radius:8px;
+                margin-bottom:20px;
+                font-weight:bold;
+            ">
+                ✅ {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+        <div class="upload-card">
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                <div class="drop-zone">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    <h2>Select Excel File</h2>
+
+                    <p>
+                        Upload .xlsx sales dataset
+                    </p>
+
+                    <input type="file"
+                           name="file"
+                           id="fileInput"
+                           accept=".xlsx"
+                           required>
+
+                    <p id="fileName">
+                        No file selected
+                    </p>
+
+                </div>
+
+                <button type="submit"
+                        class="upload-btn">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    Upload Dataset
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+
+const fileInput =
+document.getElementById("fileInput");
+
+const fileName =
+document.getElementById("fileName");
+
+fileInput.addEventListener(
+    "change",
+    function(){
+
+        if(this.files.length > 0){
+
+            fileName.innerHTML =
+            this.files[0].name;
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

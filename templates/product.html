@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Analytics</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i>
+            <h2>Sales Analytics</h2>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard" class="menu-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/revenue" class="menu-link">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <span>Revenue Analytics</span>
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/product" class="menu-link">
+                    <i class="fa-solid fa-box"></i>
+                    <span>Product Analytics</span>
+                </a>
+            </li>
+
+            
+            <li>
+    <a href="/region" class="menu-link">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Regional Analytics</span>
+    </a>
+</li>
+<li>
+                <a href="/prediction" class="menu-link">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Prediction</span>
+                </a>
+            </li>
+<li>
+    <a href="/reports" class="menu-link">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Reports</span>
+    </a>
+</li>
+
+<li>
+    <a href="/forecast" class="menu-link">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Sales Forecast</span>
+    </a>
+</li>
+
+<li>
+    <a href="/upload" class="menu-link">
+        <i class="fa-solid fa-upload"></i>
+        <span>Upload Dataset</span>
+    </a>
+</li>
+
+<li>
+    <a href="/logout" class="menu-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </a>
+</li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>Product Analytics Dashboard</h1>
+
+            <div class="profile">
+                <i class="fa-solid fa-user"></i>
+                <span>Admin</span>
+            </div>
+
+        </div>
+
+        <!-- KPI Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon product">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <h3>Top Product</h3>
+                <h2>{{ top_product }}</h2>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-icon revenue">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+                <h3>Top Product Revenue</h3>
+                <h2>₹{{ top_product_revenue }}</h2>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-icon orders">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <h3>Total Products</h3>
+                <h2>{{ total_products }}</h2>
+
+            </div>
+
+        </div>
+
+        <!-- Product Revenue Chart -->
+
+        <div class="chart-card">
+
+            <h2>Revenue By Product</h2>
+
+            <canvas id="productChart"></canvas>
+
+        </div>
+
+        <!-- Product Ranking Table -->
+
+        <div class="chart-card">
+
+            <h2>Product Ranking</h2>
+
+            <table class="product-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Rank</th>
+                        <th>Product</th>
+                        <th>Revenue</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for row in product_table %}
+
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row.Product }}</td>
+                        <td>₹{{ row.Revenue }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Insights -->
+
+        <div class="insight-card">
+
+            <h2>Product Insights</h2>
+
+            <ul>
+
+                <li>
+                    Highest revenue generated product:
+                    <strong>{{ top_product }}</strong>
+                </li>
+
+                <li>
+                    Revenue generated:
+                    <strong>₹{{ top_product_revenue }}</strong>
+                </li>
+
+                <li>
+                    Total unique products:
+                    <strong>{{ total_products }}</strong>
+                </li>
+
+                <li>
+                    Product performance analyzed successfully.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+
+const productLabels = {{ product_labels | tojson }};
+const productValues = {{ product_values | tojson }};
+
+new Chart(
+    document.getElementById("productChart"),
+    {
+        type: "bar",
+
+        data: {
+
+            labels: productLabels,
+
+            datasets: [{
+
+                label: "Revenue",
+
+                data: productValues,
+
+                backgroundColor: [
+                    "#38bdf8",
+                    "#22c55e",
+                    "#f97316",
+                    "#a855f7",
+                    "#ef4444"
+                ]
+
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    labels: {
+                        color: "white"
+                    }
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    ticks: {
+                        color: "white"
+                    }
+
+                },
+
+                y: {
+
+                    ticks: {
+                        color: "white"
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
