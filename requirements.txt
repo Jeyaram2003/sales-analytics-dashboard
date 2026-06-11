@@ -5,3 +5,4 @@ scikit-learn
 openpyxl
 gunicorn
 reportlab
+google-generativeai
